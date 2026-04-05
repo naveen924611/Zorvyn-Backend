@@ -72,8 +72,8 @@ Backend/
 ### 1. Clone the repository
  
 ```bash
-git clone <your-repo-url>
-cd <project-folder>
+git clone https://github.com/naveen924611/Zorvyn-Backend.git
+cd Zorvyn-Backend
 ```
  
 ### 2. Install dependencies
