@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
 const JWT_SECRET = process.env.JWT_SECRET || "your_jwt_secret_key";
+const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || '15m';
 
 const register = async(req, res)=>{
     const {username , email, password} = req.body;
@@ -28,7 +29,7 @@ const register = async(req, res)=>{
           delete savedUser.password;
 
         //   const token = jwt.sign({id: savedUser._id, role: savedUser.role ,status : savedUser.status}, JWT_SECRET, {expiresIn: '1h'});
-          const token = jwt.sign({id: savedUser._id , status : savedUser.status}, JWT_SECRET, {expiresIn: '1h'});
+          const token = jwt.sign({id: savedUser._id , status : savedUser.status}, JWT_SECRET, {expiresIn: JWT_EXPIRES_IN});
          
 
           if(savedUser){
@@ -57,7 +58,7 @@ const login = async(req, res)=>{
             return res.status(400).json({message: "Invalid email or password"});
         }
         // const token =  jwt.sign({id: user._id, role: user.role , status: user.status}, JWT_SECRET, {expiresIn: '1h'});
-        const token =  jwt.sign({id: user._id , status: user.status}, JWT_SECRET, {expiresIn: '15m'});
+        const token =  jwt.sign({id: user._id , status: user.status}, JWT_SECRET, {expiresIn: JWT_EXPIRES_IN});
         
         // delete user.password; 
        const user1 = user.toObject();
